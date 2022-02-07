@@ -13,6 +13,65 @@
         <DisabledTexture inherits="UIPanelButtonDisabledTexture" />
         <HighlightTexture inherits="UIPanelButtonHighlightTexture" />
     </Button>
+    <CheckButton name="BindPadProfileTabTemplate" virtual="true" hidden="true">
+        <Size x="32" y="32" />
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBackground" file="Interface\SpellBook\SpellBook-SkillLineTab">
+                    <Size x="64" y="64" />
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="-3" y="11" />
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentSubIcon" parentKey="subIcon" hidden="true">
+                    <Size x="15" y="15" />
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="2" y="-2" />
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <Texture name="$parentSubIcon2" parentKey="subIcon2" hidden="true">
+                    <Size x="15" y="15" />
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="-13" y="-2" />
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <Texture name="$parentSubIcon3" parentKey="subIcon3" hidden="true">
+                    <Size x="15" y="15" />
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="2" y="13" />
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnClick>
+                PlaySound(SOUNDKIT.IG_CHARACTER_INFO_TAB)
+                BindPadProfileTab_OnClick(self, button, down)
+            </OnClick>
+            <OnEnter>
+                BindPadProfileTab_OnEnter(self, motion)
+            </OnEnter>
+            <OnLeave>
+                GameTooltip:Hide()
+            </OnLeave>
+            <OnShow>
+                BindPadProfileTab_OnShow(self)
+            </OnShow>
+        </Scripts>
+        <NormalTexture />
+        <HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD" />
+        <CheckedTexture file="Interface\Buttons\CheckButtonHilight" alphaMode="ADD" />
+    </CheckButton>
     <Button name="BindPadIconTemplate" virtual="true">
         <Size>
             <AbsDimension x="36" y="36" />
@@ -194,7 +253,7 @@
                         <Anchor point="BOTTOMRIGHT" />
                     </Anchors>
                 </Texture>
-                <FontString name="BindPadFrameTitleText" inherits="GameFontNormal" text="BINDPAD_TITLE">
+                <FontString name="BindPadFrameTitleText" inherits="GameFontNormal" text="BINDPAD_TITLE_1">
                     <Anchors>
                         <Anchor point="TOP" relativeTo="$parent">
                             <Offset>
@@ -407,6 +466,51 @@
                     </OnLeave>
                 </Scripts>
             </Button>
+            <CheckButton name="BindPadProfileTab1" inherits="BindPadProfileTabTemplate" hidden="false" id="1">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-32" y="-85" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="BindPadProfileTab2" inherits="BindPadProfileTabTemplate" hidden="false" id="2">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="BindPadProfileTab1" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="-22" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="BindPadProfileTab3" inherits="BindPadProfileTabTemplate" hidden="false" id="3">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="BindPadProfileTab2" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="-22" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="BindPadProfileTab4" inherits="BindPadProfileTabTemplate" hidden="false" id="4">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="BindPadProfileTab3" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="-22" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
+            <CheckButton name="BindPadProfileTab5" inherits="BindPadProfileTabTemplate" id="5">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="BindPadProfileTab4" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="-22" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </CheckButton>
             <CheckButton name="$parentCharacterButton" inherits="UICheckButtonTemplate">
                 <Size>
                     <AbsDimension x="20" y="20" />
@@ -641,7 +745,7 @@
             </OnHide>
         </Scripts>
     </Frame>
-    <Button name="BindPadBindFrame" toplevel="true" parent="UIParent" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" enableKeyboard="true">
+    <Button name="BindPadBindFrame" toplevel="true" parent="UIParent" frameStrata="DIALOG" movable="true" enableMouse="true" hidden="true" enableKeyboard="true" inherits="BackdropTemplate">
         <Size>
             <AbsDimension x="600" y="200" />
         </Size>
@@ -652,17 +756,10 @@
                 </Offset>
             </Anchor>
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-            <BackgroundInsets>
-                <AbsInset left="11" right="12" top="12" bottom="11" />
-            </BackgroundInsets>
-            <TileSize>
-                <AbsValue val="32" />
-            </TileSize>
-            <EdgeSize>
-                <AbsValue val="32" />
-            </EdgeSize>
-        </Backdrop>
+        <KeyValues>
+            <KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+            <KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+        </KeyValues>
         <Layers>
             <Layer level="ARTWORK">
                 <Texture name="$parentHeader" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -796,7 +893,7 @@
             </CheckButton>
         </Frames>
         <Scripts>
-            <OnLoad>
+            <OnLoad inherit="prepend">
                 self:RegisterForClicks("AnyUp")
             </OnLoad>
             <OnHide>
@@ -1381,7 +1478,7 @@
                     </OnClick>
                 </Scripts>
             </Button>
-            <Frame name="BindPadMacroFrameTextBackground">
+            <Frame name="BindPadMacroFrameTextBackground" inherits="BackdropTemplate">
                 <Size>
                     <AbsDimension x="322" y="251" />
                 </Size>
@@ -1392,17 +1489,11 @@
                         </Offset>
                     </Anchor>
                 </Anchors>
-                <Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-                    <EdgeSize>
-                        <AbsValue val="16" />
-                    </EdgeSize>
-                    <TileSize>
-                        <AbsValue val="16" />
-                    </TileSize>
-                    <BackgroundInsets>
-                        <AbsInset left="5" right="5" top="5" bottom="5" />
-                    </BackgroundInsets>
-                </Backdrop>
+                <KeyValues>
+                    <KeyValue key="backdropInfo" value="BACKDROP_TOOLTIP_16_16_5555" type="global"/>
+                    <KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+                    <KeyValue key="backdropBorderColor" value="TOOLTIP_DEFAULT_COLOR" type="global"/>
+                </KeyValues>
             </Frame>
             <Button name="BindPadMacroFrameEditButton" inherits="BindPadUIPanelButtonTemplate" text="CHANGE_MACRO_NAME_ICON">
                 <Size>
@@ -1501,7 +1592,7 @@
             </OnMouseWheel>
         </Scripts>
     </Frame>
-    <Frame name="BindPadDialogFrame" parent="UIParent" toplevel="true" enableKeyboard="true" enableMouse="true" frameStrata="DIALOG" hidden="true">
+    <Frame name="BindPadDialogFrame" parent="UIParent" toplevel="true" enableKeyboard="true" enableMouse="true" frameStrata="DIALOG" hidden="true" inherits="BackdropTemplate">
         <Size>
             <AbsDimension x="420" y="72" />
         </Size>
@@ -1512,17 +1603,10 @@
                 </Offset>
             </Anchor>
         </Anchors>
-        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-            <BackgroundInsets>
-                <AbsInset left="11" right="12" top="12" bottom="11" />
-            </BackgroundInsets>
-            <TileSize>
-                <AbsValue val="32" />
-            </TileSize>
-            <EdgeSize>
-                <AbsValue val="32" />
-            </EdgeSize>
-        </Backdrop>
+        <KeyValues>
+            <KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+            <KeyValue key="backdropColor" value="TOOLTIP_DEFAULT_BACKGROUND_COLOR" type="global"/>
+        </KeyValues>
         <Layers>
             <Layer level="ARTWORK">
                 <FontString name="$parentText" parentKey="text" inherits="GameFontHighlight">
