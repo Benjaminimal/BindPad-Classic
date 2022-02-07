@@ -4,9 +4,10 @@ local P = NORMAL_FONT_COLOR_CODE.."%s"..FONT_COLOR_CODE_CLOSE
 BINDING_HEADER_BINDPAD = "BindPad";
 BINDING_NAME_TOGGLE_BINDPAD = "Toggle BindPad";
 BINDPAD_TITLE = "BindPad";
-BINDPAD_TITLE_1 = "BindPad Profile1";
-BINDPAD_TITLE_2 = "BindPad Profile2";
-BINDPAD_TITLE_3 = "BindPad Profile3";
+BINDPAD_TITLE_1 = "BindPad Profile 1";
+BINDPAD_TITLE_2 = "BindPad Profile 2";
+BINDPAD_TITLE_3 = "BindPad Profile 3";
+BINDPAD_TITLE_4 = "BindPad Profile 4";
 BINDPAD_KEYBINDINGS_TITLE = "Keybinding";
 BINDPAD_MACRO_TITLE = "Create BindPad Macro";
 
@@ -61,12 +62,7 @@ BINDPAD_TOOLTIP_FOR_ALL_CHARACTERS =
 BINDPAD_TOOLTIP_CREATE_MACRO = "Create BindPad Macro";
 BINDPAD_TOOLTIP_CLICK_USAGE1 = "Right click to edit macro\nLeft click to bind";
 BINDPAD_TOOLTIP_CLICK_USAGE2 = "Right click to convert\nLeft click to bind";
-BINDPAD_TOOLTIP_EXTRA_PROFILE = "Profile";
-BINDPAD_TOOLTIP_PROFILE_CURRENTLY1 = "Currently assigned to %s";
-BINDPAD_TOOLTIP_PROFILE_CURRENTLY2 = "Currently assigned to both %s and %s";
-BINDPAD_TOOLTIP_PROFILE_CURRENTLY3 = "Currently assigned to %s, %s and %s";
-BINDPAD_TOOLTIP_PROFILE_CURRENTLY4 = "Currently assigned to 4 specs";
-BINDPAD_TOOLTIP_PROFILE_CLICK_FOR = "Click here to assign Profile%d to %s";
+BINDPAD_TOOLTIP_EXTRA_PROFILE = "Profile ";
 BINDPAD_TOOLTIP_SHOW_MORE_SLOT = "Show more slots";
 BINDPAD_TOOLTIP_SHOW_LESS_SLOT = "Show less slots";
 
