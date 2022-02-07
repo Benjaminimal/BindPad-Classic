@@ -102,13 +102,9 @@ function BindPadFrame_OnLoad(self)
     self:RegisterEvent("UPDATE_BINDINGS");
     self:RegisterEvent("ACTIONBAR_SLOT_CHANGED");
     self:RegisterEvent("UPDATE_BONUS_ACTIONBAR");
-    self:RegisterEvent("UPDATE_VEHICLE_ACTIONBAR");
-    self:RegisterEvent("UPDATE_OVERRIDE_ACTIONBAR");
     self:RegisterEvent("ACTIONBAR_PAGE_CHANGED");
     self:RegisterEvent("UPDATE_SHAPESHIFT_FORM");
-    self:RegisterEvent("UPDATE_POSSESS_BAR");
 
-    self:RegisterEvent("PLAYER_TALENT_UPDATE");
     self:RegisterEvent("CVAR_UPDATE");
 
     self:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -138,16 +134,11 @@ function BindPadFrame_OnEvent(self, event, ...)
 
     elseif event == "ACTIONBAR_SLOT_CHANGED"
         or event == "UPDATE_BONUS_ACTIONBAR"
-        or event == "UPDATE_VEHICLE_ACTIONBAR"
-        or event == "UPDATE_OVERRIDE_ACTIONBAR"
         or event == "ACTIONBAR_PAGE_CHANGED"
-        or event == "UPDATE_SHAPESHIFT_FORM"
-        or event == "UPDATE_POSSESS_BAR" then
+        or event == "UPDATE_SHAPESHIFT_FORM" then
         BindPadCore.UpdateAllHotkeys();
     elseif event == "PLAYER_ENTERING_WORLD" then
         BindPadCore.InitBindPadOnce(event);
-    elseif event == "PLAYER_TALENT_UPDATE" then
-        BindPadCore.PlayerTalentUpdate();
     elseif event == "CVAR_UPDATE" then
         BindPadCore.CVAR_UPDATE(arg1, arg2);
     elseif event == "ADDON_LOADED" and arg1 == addon then
@@ -1614,21 +1605,6 @@ function BindPadCore.ClearCursor()
         PlaySound(SOUNDKIT.IG_ABILITY_ICON_DROP)
     end
     drag.type = nil;
-end
-
-function BindPadCore.PlayerTalentUpdate()
-    -- Reset cache for morphing spells
-    BindPadCore.morphingSpellCache = nil;
-
-    local newActiveSpec = GetSpecialization();
-    local profileNum = BindPadCore.GetProfileForSpec(newActiveSpec)
-
-    BindPadCore.SwitchProfile(profileNum);
-    if BindPadFrame:IsShown() then
-        BindPadFrame_OnShow();
-    end
-
-    BindPadCore.activeTalentGroup = newActiveSpec;
 end
 
 function BindPadCore.CVAR_UPDATE(arg1, arg2)
